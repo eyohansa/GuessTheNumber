@@ -1,33 +1,46 @@
+import sys
 import random
 
-turns = 0
+def main(*args, **kargs):
+    highest_num = args[0] if args[0] is not None else 20
 
-player = raw_input("Name: ")
+    turns = 0
 
-number = random.randint(1, 100)
+    player = raw_input("Name: ")
 
-print('Well, ' + player + ', I am thinking of a number between 1 and 100.')
+    number = random.randint(1, highest_num)
 
-while turns < 6:
-    print('Take a guess.')
-    guess = input()
-    guess = int(guess)
+    print('Well, ' + player + ', I am thinking of a number between 1 and ' + str(highest_num) + '.')
 
-    turns += 1
+    max_turns = args[1] if kargs[1] is not None else 6
 
-    if guess < number:
-        print('Your guess is too low.')
+    while turns < 6:
+        print('Take a guess.')
+        guess = input()
+        guess = int(guess)
 
-    elif guess > number:
-        print('Your guess is too high.')
+        turns += 1
 
-    else:
-        break
+        if guess < number:
+            print('Your guess is too low.')
 
-if guess == number:
-    turns = str(turns)
-    print('Well played, ' + player + '! You guessed my number in ' + turns + ' guesses!')
+        elif guess > number:
+            print('Your guess is too high.')
 
-if guess != number:
-    number = str(number)
-    print('Nope, the number I was thinking of was ' + number)
+        else:
+            break
+
+    if guess == number:
+        turns = str(turns)
+        print('Well played, ' + player + '! You guessed my number in ' + turns + ' guesses!')
+
+    if guess != number:
+        number = str(number)
+        print('Nope, the number I was thinking of was ' + number)
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        highest = sys.argv[1]
+        main(highest = highest, steps = 5)
+
+main(15, 5)
