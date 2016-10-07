@@ -12,7 +12,7 @@ def main(*args, **kargs):
 
     print('Well, ' + player + ', I am thinking of a number between 1 and ' + str(highest_num) + '.')
 
-    max_turns = args[1] if kargs[1] is not None else 6
+    max_turns = args[1] if args[1] is not None else 6
 
     while turns < 6:
         print('Take a guess.')
@@ -41,6 +41,6 @@ def main(*args, **kargs):
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         highest = sys.argv[1]
-        main(highest = highest, steps = 5)
-
-main(15, 5)
+        main(highest, 5)
+    else:
+        main(15, 5)
